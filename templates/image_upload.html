@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload GZ File</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Analyze CT-images</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/mdb.min.css' %}"/>
+    <link rel="icon" type="image/png" href="../media/logos.png">
+</head>
+<body>
+<div class="mb-5 mb-lg-7">
+    {% include 'header.html' %}
+    <div class="bg-image vh-100" style="
+                 margin-top: -58.59px;
+                 background-image: url('../media/image-upload-header.jpg');">
+        {% include 'header.html' %}
+        <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">
+            {% include 'header.html' %}
+            <div class="container d-flex justify-content-center align-items-center h-100">
+                <div class="text-white text-center">
+                    <h1 class="mb-3">ЛАСКАВО ПРОСИМО!</h1>
+                    <h5 class="mb-4">ЗАВАНТАЖТЕ РЕЗУЛЬТАТИ КТ ПРЯМО ЗАРАЗ</h5>
+
+                    <form id="upload_form" method="POST" action="upload" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" id="gz_file" accept=".gz" name="gz_file" hidden/>
+                        <label for="gz_file" class="btn btn-secondary btn-rounded btn-lg m-2"
+                               data-ripple-color="primary" role="button"
+                               type="submit">Візуалізація КТ</label>
+                    </form>
+                    <form id="analyze_form" method="POST" action="analyze" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" id="gz_file_analyze" accept=".gz" name="gz_file_analyze" hidden/>
+                        <label for="gz_file_analyze" class="btn btn-secondary btn-rounded btn-lg m-2"
+                               data-ripple-color="primary" role="button"
+                               type="submit">Аналіз КТ</label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<body class="bg-light">
+{% if video_url %}
+    <h1 class="d-flex justify-content-center text-black">Візуалізація КТ-зображень</h1>
+    <div class="text-center mb-5">
+        <video controls style="width: 100%; max-width: 800px; display: block; margin: 0 auto;">
+            <source src="{{ video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+{% endif %}
+{% if analyze_video_url %}
+    <h1 class="d-flex justify-content-center text-black">Аналіз КТ-зображень</h1>
+    <div class="text-center mb-5">
+        <video controls style="width: 100%; max-width: 800px; display: block; margin: 0 auto;">
+            <source src="{{ analyze_video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+{% endif %}
+<br>
+<section class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="../media/pexels-andrea-piacquadio-3807629.jpg" alt="Image 1" class="img-fluid"
+                 style="border-radius: 15px;">
+            <h3 class="d-flex justify-content-center">Діагностика захворювань</h3>
+            <p>Завдяки нашій передовій системі діагностики, ми надаємо комплексні оцінки та точний аналіз,
+                щоб допомогти в ранньому виявленні та лікуванні захворювань легень.</p>
+        </div>
+        <div class="col-md-4">
+            <img src="../media/pexels-anna-shvets-4226124.jpg" alt="Image 2" class="img-fluid"
+                 style="border-radius: 15px;">
+            <h3 class="d-flex justify-content-center">Аналіз КТ-зображень</h3>
+            <p>Використовуючи останні досягнення в медичній візуалізації та штучному інтелекті, наша система
+                діагностики легенів підвищує ефективність і точність виявлення захворювань легень</p>
+        </div>
+        <div class="col-md-4">
+            <img src="../media/pexels-tirachard-kumtanom-733857.jpg" alt="Image 3" class="img-fluid"
+                 style="border-radius: 15px;">
+            <h3 class="d-flex justify-content-center">Зберігання історії хвороб</h3>
+            <p>Переглядайте історії хвороб в особистому кабінеті.</p>
+            Аналізуйте динаміку захворювання та надсилайте сімейному лікарю
+        </div>
+    </div>
+</section>
+</body>
+<footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2023 Lung Diagnostic System. All rights reserved.</p>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var fileInput = document.getElementById("gz_file");
+
+        fileInput.addEventListener("change", function () {
+            if (fileInput.files.length > 0) {
+                var form = document.getElementById("upload_form");
+                form.submit();
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var fileInput = document.getElementById("gz_file_analyze");
+
+        fileInput.addEventListener("change", function () {
+            if (fileInput.files.length > 0) {
+                var form = document.getElementById("analyze_form");
+                form.submit();
+            }
+        });
+    });
+</script>
+<!-- MDB -->
+{#<script type="text/javascript" src="{% static 'admin/js/mdb.min.js' %}"></script>#}
+<!-- Custom scripts -->
+<script type="text/javascript"></script>
+</body>
+</html>

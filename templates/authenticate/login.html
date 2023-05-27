@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Login</title>
+    <link rel="icon" type="image/png" href="../media/logos.png">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/mdb.min.css' %}"/>
+    <style>
+        .custom-height {
+            height: 400px;
+        }
+
+        .custom-great-height {
+            height: 1000px;
+        }
+         .custom-list-style {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+
+<section class="bg-secondary custom-great-height">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0 custom-height">
+                        <div class="col-xl-6 d-none d-xl-block">
+                            <img src="../media/login-form.jpg"
+                                 alt="Sample photo" class="img-fluid"
+                                 style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;
+                                    height: 400px"/>
+                        </div>
+                        <div class="col-xl-6 align-self-center">
+                            <div class="card-body p-md-5 text-black flex-column">
+                                <form class="mx-1 mx-md-4 align-self-center" method="post" action="login_user">
+                                    <h3 class="mb-5 text-uppercase d-flex justify-content-center">Вхід</h3>
+                                    {% csrf_token %}
+                                    <div class="form-outline mb-4">
+                                        <input type="username" name="username" id="username" class="form-control"/>
+                                        <label class="form-label" id="username" for="username">Username</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input type="password" id="password" name="password" class="form-control"/>
+                                        <label id="password" class="form-label" for="password">Password</label>
+                                    </div>
+                                     {% if messages %}
+                                        <ul class="form-control form-control-lg form-outline mb-4 alert-danger custom-list-style">
+                                            {% for message in messages %}
+                                                <li>{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                    <div class="d-flex justify-content-end pt-3">
+                                        <a href="/register">
+                                            <button type="button" class="btn btn-light btn-lg">Зареєструватись</button>
+                                        </a>
+                                        <button type="submit" class="btn btn-warning btn-lg ms-2">Увійти
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="{% static 'admin/js/mdb.min.js' %}"></script>
+<script type="text/javascript"></script>
+</body>
+</html>

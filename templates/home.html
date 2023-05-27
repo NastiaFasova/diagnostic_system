@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Home</title>
+    <link rel="icon" type="image/png" href="../media/logos.png">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/mdb.min.css' %}"/>
+    <style>
+        .custom-style {
+            margin: 30px;
+        }
+    </style>
+</head>
+<body>
+{% include 'header.html' %}
+<br>
+<div class="row custom-style">
+    {% for diagnose in diagnoses %}
+        <div class="col-xl-4 col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <img src="../media/download-pdf.png"
+                             alt=""
+                             style="width: 45px; height: 45px"/>
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1">{{ diagnose.title }}</p>
+                            <p class="text-muted mb-0">Created at: {{ diagnose.created_at }}</p>
+                            <p class="text-muted mb-0"><a href="{{ diagnose.pdf_file.url }}">Download PDF</a></p>
+                            <p class="text-muted mb-0">
+                                <a href="{{ diagnose.pdf_file.url }}" target="_blank">View PDF</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<script type="text/javascript"></script>
+</body>
+</html>
