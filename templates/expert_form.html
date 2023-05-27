@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Expert System</title>
+    <link rel="icon" type="image/png" href="../media/logos.png">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/mdb.min.css' %}"/>
+     <style>
+        .custom-list-style {
+            list-style: none;
+        }
+    </style>
+</head>
+{% include 'header.html' %}
+<body>
+<section class="h-100 bg-secondary">
+    <div class="container py-5 h-100 ">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4 ">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-xl-6 d-none d-xl-block">
+                            <img src="../media/expert_form.jpg"
+                                 alt="Sample photo" class="img-fluid"
+                                 style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;"/>
+                        </div>
+                        <div class="col-xl-6 ">
+                            <div class="card-body p-md-5 text-black">
+                                <h3 class="mb-5 text-uppercase d-flex justify-content-center">ЗАПИТ ДЛЯ ДІАГНОСТИКИ</h3>
+                                <form class="px-md-2 " method="post" action="diagnose">
+                                    {% csrf_token %}
+
+                                    <div class="row">
+
+                                        <div class="col-md-6 mb-4">
+                                            <select class="form-select" name="cough" id="cough">
+                                                <option value="">Кашель</option>
+                                                <option value="dry">Сухий</option>
+                                                <option value="productive">Вологий</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <select class="form-select" name="wheezing" id="wheezing">
+                                                <option value="">Хрипи?</option>
+                                                <option value="Y">Так</option>
+                                                <option value="N">Ні</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <select class="form-select" name="coughingUpBlood" id="coughingUpBlood">
+                                            <option value="">Відкашлювання кров'ю?</option>
+                                            <option value="Y">Так</option>
+                                            <option value="N">Ні</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <select class="form-select" name="chestPain" id="chestPain">
+                                                <option value="">Біль у грудях?</option>
+                                                <option value="Y">Так</option>
+                                                <option value="N">Ні</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <select class="form-select" name="fever" id="fever">
+                                                <option value="">Лихоманка?</option>
+                                                <option value="Y">Так</option>
+                                                <option value="N">Ні</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <select class="form-select" name="rapidBreathing" id="rapidBreathing">
+                                            <option value="">Прискорене дихання?</option>
+                                            <option value="Y">Так</option>
+                                            <option value="N">Ні</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <select class="form-select" name="shortnessOfBreath"
+                                                    id="shortnessOfBreath">
+                                                <option value="" selected>Задишка?</option>
+                                                <option value="Y">Так</option>
+                                                <option value="N">Ні</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <select class="form-select" name="smokingHistory" id="smokingHistory">
+                                                <option value="" selected>Ви палите?</option>
+                                                <option value="Y">Так</option>
+                                                <option value="N">Ні</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <select class="form-select" name="rapidHeartbeat" id="rapidHeartbeat">
+                                            <option value="" selected>Прискорене серцебиття?</option>
+                                            <option value="Y">Так</option>
+                                            <option value="N">Ні</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <select class="form-select" name="toxicJob" id="toxicJob">
+                                            <option value="" selected>Контактуєте з токсичними речовинами?</option>
+                                            <option value="Y">Так</option>
+                                            <option value="N">Ні</option>
+                                        </select>
+                                    </div>
+                                       {% if messages %}
+                                        <ul class="form-control form-control-lg form-outline mb-4 alert-danger custom-list-style">
+                                            {% for message in messages %}
+                                                <li>{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+
+                            <div class="d-flex justify-content-end pt-3">
+                                <a href="/image_upload">
+                                    <button type="button" class="btn btn-light btn-lg">Аналіз КТ-зображення
+                                    </button>
+                                </a>
+                                <button type="submit" class="btn btn-warning btn-lg ms-2">Діагностувати</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- MDB -->
+{#<script type="text/javascript" src="{% static 'admin/js/mdb.min.js' %}"></script>#}
+{#    <!-- Custom scripts -->#}
+{#<script type="text/javascript"></script>#}
+</body>
+</html>

@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/mdb.min.css' %}"/>
+    <link rel="icon" type="image/png" href="../media/logos.png">
+
+    <style>
+        .custom-list-style {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+<section class="h-100 bg-secondary">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="col-xl-6 d-none d-xl-block">
+                            <img src="../media/register-form.jpg"
+                                 alt="Sample photo" class="img-fluid"
+                                 style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;"/>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card-body p-md-5 text-black">
+                                <form class="mx-1 mx-md-4" method="post" action="register">
+                                    <h3 class="mb-5 text-uppercase d-flex justify-content-center">Реєстрація</h3>
+                                    {% csrf_token %}
+                                    <div class="form-outline mb-4">
+                                        {{ form.username }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                {{ form.first_name }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                {{ form.last_name }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+
+                                        <h6 class="mb-0 me-4">Gender: </h6>
+
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" id="femaleGender"
+                                                   value="option1" name="gender"/>
+                                            <label class="form-check-label" for="femaleGender">Female</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="gender" id="maleGender"
+                                                   value="option2"/>
+                                            <label class="form-check-label" for="maleGender">Male</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="date" name="birthday" id="birthday"
+                                               class="form-control form-control-lg" required="true"/>
+                                        <label name="birthday" id="birthday" class="form-label"
+                                               for="birthday">Birthday</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        {{ form.email }}
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        {{ form.password1 }}
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        {{ form.password2 }}
+                                    </div>
+
+                                    {% if messages %}
+                                        <ul class="form-control form-control-lg form-outline mb-4 alert-danger custom-list-style">
+                                            {% for message in messages %}
+                                                <li>{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                    <div class="d-flex justify-content-end pt-3">
+                                        <a href="/login_user">
+                                            <button type="button" class="btn btn-light btn-lg">Увійти</button>
+                                        </a>
+                                        <button type="submit" class="btn btn-warning btn-lg ms-2">Зареєструватись
+                                        </button>
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="{% static 'admin/js/mdb.min.js' %}"></script>
+</body>
+</html>
